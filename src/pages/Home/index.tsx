@@ -7,12 +7,9 @@ import { listProduct } from "../../service/api";
 const Home = () => {
   return (
     <>
-      <div className="container">
-        <Hero />
-
-        <ProductList products={listProduct} />
-        <Footer />
-      </div>
+      <Hero />
+      <ProductList products={listProduct} />
+      <Footer />
     </>
   );
 };

@@ -14,11 +14,12 @@ export const HeroContainer = styled.div`
   align-items: center;
 
   height: 380px;
-  padding: 64px 170px 40px 170px;
+  padding: 0px 170px;
 `;
 
 export const Logo = styled.img`
   max-width: 125px;
+  margin-top: 64px;
 `;
 
 export const HeadLine = styled.h1`
@@ -27,4 +28,5 @@ export const HeadLine = styled.h1`
   font-weight: bold;
   text-align: center;
   font-size: 36px;
+  margin-bottom: 64px;
 `;
