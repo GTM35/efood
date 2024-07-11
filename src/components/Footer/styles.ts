@@ -34,4 +34,6 @@ export const FooterContainer = styled.div`
 
   background-color: ${colors.text2};
   padding: 40px 0;
+
+  margin-top: 50px;
 `;

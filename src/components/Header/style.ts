@@ -15,17 +15,14 @@ export const ContainerCountCart = styled.div`
 `;
 
 export const ContainerHeader = styled.header`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 0 170px;
-  height: 180px;
-
   background-image: url(${bgImage});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const TextCart = styled(CountCart)``;

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ContentAlign } from "../../styles";
 
 export const TextKitchen = styled.h2`
   font-weight: 100;
@@ -14,18 +15,25 @@ export const TextTitleRestaurant = styled.h1`
 `;
 
 export const ContainerPresentation = styled.section`
-  height: 280px;
-  padding: 24px 170px 32px 170px;
+  height: 223px;
+  max-height: 1366px;
   color: #fff;
   position: relative;
+  padding: 32px 0 25px;
 
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
 
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+
+  ${ContentAlign} {
+    flex-direction: column;
+    height: 100%;
+    align-items: start;
+  }
 `;
 
 export const Shadow = styled.div`

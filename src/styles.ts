@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 export const colors = {
   background: "#FFF8F2",
@@ -36,4 +36,17 @@ export const Globalcss = createGlobalStyle`
         cursor: pointer;
         text-decoration: none;
     }
+
+    
+`;
+
+export const ContentAlign = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+  max-width: 1024px;
+
+  height: 180px;
 `;

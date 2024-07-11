@@ -7,7 +7,7 @@ export const Card = styled.div`
   gap: 8px;
   background-color: ${colors.text};
 
-  width: 320px;
+  width: calc(100% - 16px);
   height: fit-content;
   padding: 8px;
 

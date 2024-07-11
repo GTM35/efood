@@ -1,7 +1,13 @@
 import styled from "styled-components";
 
 export const ContainerFoodList = styled.ul`
-  padding: 56px 170px 120px 170px;
+  height: fit-content;
+  min-height: 884px;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   li {
     list-style: none;
@@ -9,11 +15,11 @@ export const ContainerFoodList = styled.ul`
 `;
 
 export const ListFood = styled.div`
-  width: fit-content;
-
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 32px;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  max-width: 1024px;
 `;
