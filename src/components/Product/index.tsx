@@ -1,7 +1,6 @@
 import {
   ProductContainer,
   ProductInfo,
-  Image,
   Title,
   Description,
   RatingContainer,
