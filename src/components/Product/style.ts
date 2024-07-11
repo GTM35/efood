@@ -14,6 +14,20 @@ export const ProductInfo = styled.div`
   gap: 16px;
   flex-direction: column;
   padding: 8px;
+
+  border-left: 1px solid ${colors.text};
+  border-right: 1px solid ${colors.text};
+  border-bottom: 1px solid ${colors.text};
+`;
+
+export const ProductImageContainer = styled.div`
+  width: 100%;
+  height: 217px;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const Image = styled.img`

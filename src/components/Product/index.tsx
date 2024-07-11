@@ -9,6 +9,7 @@ import {
   Rating,
   Tag,
   TagContainer,
+  ProductImageContainer,
 } from "./style";
 
 import star from "../../assets/images/star.png";
@@ -26,7 +27,9 @@ type Props = {
 
 const Product = ({ title, rating, img, description, tags, link }: Props) => (
   <ProductContainer>
-    <Image src={img} alt="Hioki Sushi" />
+    <ProductImageContainer>
+      <img src={img} alt="Hioki Sushi" />
+    </ProductImageContainer>
 
     <TagContainer>
       {tags.map((tag) => (
