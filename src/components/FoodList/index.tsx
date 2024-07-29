@@ -7,8 +7,6 @@ type Props = {
 };
 
 const FoodList = ({ cardapio }: Props) => {
-  console.log(cardapio);
-
   return (
     <ContainerFoodList>
       <ListFood>
