@@ -25,6 +25,13 @@ export const formataPreco = (preco = 0) => {
   }).format(preco);
 };
 
+const getDescricao = (descricao: string) => {
+  if (descricao.length > 150) {
+    return descricao.slice(0, 150) + "...";
+  }
+  return descricao;
+};
+
 const Food = ({ food }: Props) => {
   const [showModal, setShowModal] = useState(false);
 
@@ -37,7 +44,7 @@ const Food = ({ food }: Props) => {
       <Card>
         <img src={food.foto} alt="Comida" />
         <Title>{food.nome}</Title>
-        <Description>{food.descricao}</Description>
+        <Description>{getDescricao(food.descricao)}</Description>
         <Button onClick={() => closeModal()}>Mais detalhes</Button>
       </Card>
       <Modal className={showModal ? "isVisible" : ""}>

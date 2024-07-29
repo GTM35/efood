@@ -6,9 +6,10 @@ export const Card = styled.div`
   flex-direction: column;
   gap: 8px;
   background-color: ${colors.text};
+  justify-content: space-between;
 
   width: calc(100% - 16px);
-  height: fit-content;
+  height: calc(340px - 16px);
   padding: 8px;
 
   img {
