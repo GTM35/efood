@@ -4,10 +4,9 @@ export const ContainerFoodList = styled.ul`
   height: fit-content;
   min-height: 884px;
   width: 100%;
-  margin-top: 56px;
 
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: center;
 
   li {

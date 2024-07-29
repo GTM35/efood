@@ -13,7 +13,7 @@ const FoodList = ({ cardapio }: Props) => {
     <ContainerFoodList>
       <ListFood>
         {cardapio.map((food) => (
-          <li>
+          <li key={food.id}>
             <Food food={food} />
           </li>
         ))}

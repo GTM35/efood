@@ -35,11 +35,8 @@ const Food = ({ food }: Props) => {
     <>
       <Card>
         <img src={food.foto} alt="Comida" />
-        <Title>Pizza Marguerita</Title>
-        <Description>
-          A clássica Marguerita: molho de tomate suculento, mussarela derretida,
-          manjericão fresco e um toque de azeite. Sabor e simplicidade!
-        </Description>
+        <Title>{food.nome}</Title>
+        <Description>{food.descricao}</Description>
         <Button onClick={() => closeModal()}>Mais detalhes</Button>
       </Card>
       <Modal className={showModal ? "isVisible" : ""}>

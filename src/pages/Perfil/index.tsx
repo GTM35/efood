@@ -10,6 +10,8 @@ const Perfil = () => {
   const { id } = useParams();
   const [restaurant, setRestaurant] = useState<RestaurantType>();
 
+  console.log(id);
+
   useEffect(() => {
     fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
       .then((res) => res.json())

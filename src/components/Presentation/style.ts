@@ -20,6 +20,7 @@ export const ContainerPresentation = styled.section`
   color: #fff;
   position: relative;
   padding: 32px 0 25px;
+  margin-bottom: 56px;
 
   display: flex;
   align-items: center;
