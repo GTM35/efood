@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 type Props = {
   id: number;
   title: string;
-  rating: number;
+  rating: string;
   img: string;
   description: string;
   tags: string[];
@@ -32,7 +32,7 @@ const Product = ({ title, rating, img, description, tags, link }: Props) => (
 
     <TagContainer>
       {tags.map((tag) => (
-        <Tag>{tag}</Tag>
+        <Tag key={tag}>{tag}</Tag>
       ))}
     </TagContainer>
 
