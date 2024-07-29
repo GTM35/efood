@@ -1,13 +1,13 @@
-import { Restaurant } from "../../pages/Home";
+import { RestaurantType } from "../../pages/Home";
 import Product from "../Product";
 import { ProductContainer } from "./style";
 
 type Props = {
-  restaurants: Restaurant[];
+  restaurants: RestaurantType[];
 };
 
 const ProductList = ({ restaurants }: Props) => {
-  const tags = (restaurant: Restaurant) => {
+  const tags = (restaurant: RestaurantType) => {
     const tags = [];
     if (restaurant.destacado) {
       tags.push("Destaque da semana");

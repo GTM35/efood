@@ -13,6 +13,9 @@ export const Card = styled.div`
 
   img {
     width: 100%;
+    max-width: 304px;
+    height: 167px;
+    object-fit: cover;
   }
 `;
 

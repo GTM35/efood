@@ -5,16 +5,21 @@ import {
   Shadow,
 } from "./style";
 
-import bgImage from "../../assets/images/food2.png";
 import { ContentAlign } from "../../styles";
 
-const Presentation = () => {
+type Props = {
+  image: string;
+  title: string;
+  kitchen: string;
+};
+
+const Presentation = ({ image, kitchen, title }: Props) => {
   return (
-    <ContainerPresentation style={{ backgroundImage: `url(${bgImage})` }}>
+    <ContainerPresentation style={{ backgroundImage: `url(${image})` }}>
       <ContentAlign>
         <Shadow />
-        <TextKitchen>Italiana</TextKitchen>
-        <TextTitleRestaurant>La Dolce Vita Trattoria</TextTitleRestaurant>
+        <TextKitchen>{kitchen}</TextKitchen>
+        <TextTitleRestaurant>{title}</TextTitleRestaurant>
       </ContentAlign>
     </ContainerPresentation>
   );
