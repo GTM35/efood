@@ -17,6 +17,7 @@ type Props = {
   food: CardapioType;
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const formataPreco = (preco = 0) => {
   return new Intl.NumberFormat("pt-BR", {
     style: "currency",
