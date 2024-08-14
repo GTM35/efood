@@ -7,6 +7,7 @@ export const CountCart = styled.p`
   font-weight: 900;
   font-size: 18px;
   color: ${colors.text};
+  cursor: pointer;
 `;
 
 export const ContainerCountCart = styled.div`

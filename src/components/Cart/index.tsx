@@ -12,8 +12,8 @@ import pizza from "../../assets/images/food3.png";
 
 const Cart = () => {
   return (
-    <CartContainer>
-      <Overlay></Overlay>
+    <CartContainer className={"is-open"}>
+      <Overlay />
       <Sidebar>
         <ul>
           <CartItem>
