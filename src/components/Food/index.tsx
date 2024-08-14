@@ -12,6 +12,8 @@ import {
 import close from "../../assets/images/close.png";
 import { useState } from "react";
 import { CardapioType } from "../../pages/Home";
+import { useDispatch } from "react-redux";
+import { addItem, openCart } from "../../redux/reducers/cart";
 
 type Props = {
   food: CardapioType;
@@ -39,6 +41,10 @@ const Food = ({ food }: Props) => {
     setShowModal(!showModal);
   };
 
+  const dispatch = useDispatch();
+
+  const addProductCart = (item: CardapioType) => dispatch(addItem(item));
+
   return (
     <>
       <Card>
@@ -56,9 +62,13 @@ const Food = ({ food }: Props) => {
               {food.descricao}
               <span>{food.porcao}</span>
             </p>
-            <button>{`Adicionar ao carrinho - ${formataPreco(
-              food.preco
-            )}`}</button>
+            <button
+              onClick={() => {
+                addProductCart(food);
+                dispatch(openCart());
+                closeModal();
+              }}
+            >{`Adicionar ao carrinho - ${formataPreco(food.preco)}`}</button>
           </ModalInfo>
           <CloseIcon
             src={close}
