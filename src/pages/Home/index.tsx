@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Footer from "../../components/Footer";
 import Hero from "../../components/Hero";
 import ProductList from "../../components/ProductList";
+import Checkout from "../../components/Checkout";
 
 export interface CardapioType {
   foto: string;
@@ -37,6 +38,7 @@ const Home = () => {
       <Hero />
       <ProductList restaurants={listRestaurant} />
       <Footer />
+      <Checkout /> {/* //TODO: Retirar ao concluir */}
     </>
   );
 };
