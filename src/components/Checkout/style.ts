@@ -11,7 +11,11 @@ export const CheckoutContainer = styled.div`
   left: 0;
   z-index: 1;
 
-  display: flex;
+  display: none;
+
+  &.is-open {
+    display: flex;
+  }
 
   ${Sidebar} {
     color: ${colors.text2};
@@ -49,6 +53,12 @@ export const Row = styled.div`
 
     font-size: 14px;
     font-weight: 700;
+  }
+
+  small {
+    font-weight: 700;
+    color: #000;
+    width: fit-content;
   }
 `;
 
@@ -93,7 +103,6 @@ export const PaymentContainer = styled(DeliveryContainer)`
   ${TwoFields} {
     #numberCard {
       width: calc(228px - 16px);
-      background-color: red;
     }
 
     #cvv {

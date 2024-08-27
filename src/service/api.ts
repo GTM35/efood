@@ -1,59 +1,59 @@
-import food1 from "../assets/images/food1.png";
-import food2 from "../assets/images/food2.png";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { RestaurantType } from "../pages/Home";
 
-export const listProduct = [
-  {
-    id: 1,
-    title: "Hioki Sushi ",
-    rating: 4.9,
-    img: food1,
-    description:
-      "Peça já o melhor da culinária japonesa no conforto da sua casa! Sushis frescos, sashimis deliciosos e pratos quentes irresistíveis. Entrega rápida, embalagens cuidadosas e qualidade garantida. Experimente o Japão sem sair do lar com nosso delivery!",
-    tags: ["Destaque da semana", "Japonesa"],
-  },
-  {
-    id: 2,
-    title: "La Dolce Vita Trattoria",
-    rating: 4.6,
-    img: food2,
-    description:
-      "A La Dolce Vita Trattoria leva a autêntica cozinha italiana até você! Desfrute de massas caseiras, pizzas deliciosas e risotos incríveis, tudo no conforto do seu lar. Entrega rápida, pratos bem embalados e sabor inesquecível. Peça já!",
-    tags: ["Italiana"],
-  },
-  {
-    id: 3,
-    title: "Hioki Sushi ",
-    rating: 4.9,
-    img: food1,
-    description:
-      "Peça já o melhor da culinária japonesa no conforto da sua casa! Sushis frescos, sashimis deliciosos e pratos quentes irresistíveis. Entrega rápida, embalagens cuidadosas e qualidade garantida. Experimente o Japão sem sair do lar com nosso delivery!",
-    tags: ["Destaque da semana", "Japonesa"],
-  },
-  {
-    id: 4,
-    title: "La Dolce Vita Trattoria",
-    rating: 4.6,
-    img: food2,
-    description:
-      "A La Dolce Vita Trattoria leva a autêntica cozinha italiana até você! Desfrute de massas caseiras, pizzas deliciosas e risotos incríveis, tudo no conforto do seu lar. Entrega rápida, pratos bem embalados e sabor inesquecível. Peça já!",
-    tags: ["Italiana"],
-  },
-  {
-    id: 5,
-    title: "Hioki Sushi ",
-    rating: 4.9,
-    img: food1,
-    description:
-      "Peça já o melhor da culinária japonesa no conforto da sua casa! Sushis frescos, sashimis deliciosos e pratos quentes irresistíveis. Entrega rápida, embalagens cuidadosas e qualidade garantida. Experimente o Japão sem sair do lar com nosso delivery!",
-    tags: ["Destaque da semana", "Japonesa"],
-  },
-  {
-    id: 6,
-    title: "La Dolce Vita Trattoria",
-    rating: 4.6,
-    img: food2,
-    description:
-      "A La Dolce Vita Trattoria leva a autêntica cozinha italiana até você! Desfrute de massas caseiras, pizzas deliciosas e risotos incríveis, tudo no conforto do seu lar. Entrega rápida, pratos bem embalados e sabor inesquecível. Peça já!",
-    tags: ["Italiana"],
-  },
-];
+type Response = {
+  orderId: string;
+};
+type PurchasePayload = {
+  products: [
+    {
+      id: number;
+      price: number;
+    }
+  ];
+  delivery: {
+    receiver: string;
+    address: {
+      description: string;
+      city: string;
+      zipCode: string;
+      number: number;
+      complement?: string;
+    };
+  };
+  payment: {
+    card: {
+      name: string;
+      number: string;
+      code: number;
+      expires: {
+        month: number;
+        year: number;
+      };
+    };
+  };
+};
+
+const api = createApi({
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://fake-api-tau.vercel.app/api/efood/",
+  }),
+  endpoints: (builder) => ({
+    getRestaurantSelected: builder.query<RestaurantType, string>({
+      query: (id) => `restaurantes/${id}`,
+    }),
+    getRestaurants: builder.query<RestaurantType[], void>({
+      query: () => "restaurantes",
+    }),
+    purchase: builder.mutation<Response, PurchasePayload>({
+      query: (body) => ({ url: "checkout", method: "POST", body }),
+    }),
+  }),
+});
+
+export default api;
+export const {
+  useGetRestaurantsQuery,
+  useGetRestaurantSelectedQuery,
+  usePurchaseMutation,
+} = api;

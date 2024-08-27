@@ -1,23 +1,21 @@
-import { useEffect, useState } from "react";
 import FoodList from "../../components/FoodList";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Presentation from "../../components/Presentation";
 import { useParams } from "react-router-dom";
-import { RestaurantType } from "../Home";
+import { useGetRestaurantSelectedQuery } from "../../service/api";
+
+type IdParam = {
+  id: string;
+};
 
 const Perfil = () => {
-  const { id } = useParams();
-  const [restaurant, setRestaurant] = useState<RestaurantType>();
+  const { id } = useParams() as IdParam;
 
-  useEffect(() => {
-    fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
-      .then((res) => res.json())
-      .then((res) => setRestaurant(res));
-  }, [id]);
+  const { data: restaurant } = useGetRestaurantSelectedQuery(id);
 
   if (!restaurant) {
-    return <h3>Carregando...</h3>;
+    return <h3>Carregando...</h3> /* TODO: Colocar um loader aqui */;
   }
 
   return (
