@@ -51,23 +51,6 @@ const Checkout = ({ totalPrice }: Props) => {
     return (message = "");
   };
 
-  useEffect(() => {
-    if (isSuccess) {
-      dispatch(openConfirmation());
-      form.values.Cardname = "";
-      form.values.address = "";
-      form.values.cep = "";
-      form.values.city = "";
-      form.values.complement = "";
-      form.values.cvv = "";
-      form.values.expirantionYear = "";
-      form.values.expirationMonth = "";
-      form.values.fullname = "";
-      form.values.numberAddress = "";
-      form.values.numberCard = "";
-    }
-  }, [isSuccess]);
-
   const form = useFormik({
     initialValues: {
       fullname: "",
@@ -160,6 +143,23 @@ const Checkout = ({ totalPrice }: Props) => {
       });
     },
   });
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(openConfirmation());
+      form.values.Cardname = "";
+      form.values.address = "";
+      form.values.cep = "";
+      form.values.city = "";
+      form.values.complement = "";
+      form.values.cvv = "";
+      form.values.expirantionYear = "";
+      form.values.expirationMonth = "";
+      form.values.fullname = "";
+      form.values.numberAddress = "";
+      form.values.numberCard = "";
+    }
+  }, [isSuccess, dispatch, form.values]);
 
   const handlePayment = () => {
     if (
