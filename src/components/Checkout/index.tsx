@@ -26,6 +26,7 @@ import * as Yup from "yup";
 
 import { IMaskInput } from "react-imask";
 import { usePurchaseMutation } from "../../service/api";
+import { formataPreco } from "../Food";
 
 const Checkout = ({ totalPrice }: Props) => {
   const dispatch = useDispatch();
