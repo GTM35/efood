@@ -84,19 +84,20 @@ export const Buttons = styled.div`
   gap: 8px;
 `;
 
-export const Button = styled.a`
+export const Button = styled.button`
   background-color: ${colors.text2};
   height: calc(24px - 8px);
   font-size: 16px;
   font-weight: 700;
   color: ${colors.text};
+  height: 24px;
+  width: 100%;
+  cursor: pointer;
+  border: none;
 
-  padding: 4px 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  cursor: pointer;
 `;
 
 export const PaymentContainer = styled(DeliveryContainer)`

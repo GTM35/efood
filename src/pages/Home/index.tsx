@@ -35,7 +35,7 @@ const Home = () => {
       </>
     );
   } else {
-    <p>Fazer um loader aqui</p>; /* TODO: Fazer um loader aqui. */
+    <h3>Carregando...</h3>;
   }
 };
 

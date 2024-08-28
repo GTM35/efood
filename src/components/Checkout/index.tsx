@@ -1,4 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+
+import { RootReducer } from "../../redux/store";
+import {
+  openCart,
+  openDelivery,
+  openPayment,
+  Confirmation,
+  closeCart,
+  openConfirmation,
+} from "../../redux/reducers/cart";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { IMaskInput } from "react-imask";
+import { usePurchaseMutation } from "../../service/api";
+
 import { Overlay, Sidebar } from "../Cart/style";
 import {
   Button,
@@ -12,21 +28,6 @@ import {
   TextContainer,
   TwoFields,
 } from "./style";
-import { RootReducer } from "../../redux/store";
-import {
-  openCart,
-  openConfirmation,
-  openDelivery,
-  openPayment,
-  Confirmation,
-  closeCart,
-} from "../../redux/reducers/cart";
-
-import { useFormik } from "formik";
-import * as Yup from "yup";
-
-import { IMaskInput } from "react-imask";
-import { usePurchaseMutation } from "../../service/api";
 
 const Checkout = () => {
   const dispatch = useDispatch();
@@ -35,25 +36,6 @@ const Checkout = () => {
 
   const { visibleConfirmation, visibleDelivery, visiblePayment, items } =
     useSelector((state: RootReducer) => state.cart);
-
-  /* const handleSubmit = () => {
-    if (
-      form.values.Cardname &&
-      form.values.numberCard &&
-      form.values.cvv &&
-      form.values.expirantionYear &&
-      form.values.expirationMonth != ""
-    ) {
-      if (items.length === 0) {
-        alert("Selecione um produto!");
-      } else {
-        handleConfirmation();
-        console.log("chegou aqui2");
-      }
-    } else {
-      alert("preencha todos os campos!");
-    }
-  }; */
 
   const getErrorMessage = (fieldName: string, message?: string) => {
     const isTouched = fieldName in form.touched;
@@ -131,7 +113,7 @@ const Checkout = () => {
     }),
     onSubmit: (values) => {
       purchase({
-        products: [{ id: 1, price: 100 }],
+        products: [{ id: 50, price: 100 }],
         delivery: {
           address: {
             city: values.city,
@@ -165,14 +147,17 @@ const Checkout = () => {
       form.values.cep &&
       form.values.numberAddress
     ) {
-      dispatch(openPayment());
+      if (items.length === 0) {
+        alert("Escolha um produto!");
+      } else {
+        dispatch(openPayment());
+      }
     } else {
       alert("Preencha todos os campos!");
     }
   };
   const handleCart = () => dispatch(openCart());
   const handleDelivery = () => dispatch(openDelivery());
-  const handleConfirmation = () => dispatch(openConfirmation());
 
   const handleCheckout = () => {
     let checkoutVisible = false;
@@ -182,7 +167,33 @@ const Checkout = () => {
     return checkoutVisible;
   };
 
-  const closeCartAll = () => dispatch(Confirmation());
+  const closeCartAll = () => {
+    dispatch(Confirmation());
+    form.values.Cardname = "";
+    form.values.address = "";
+    form.values.cep = "";
+    form.values.city = "";
+    form.values.complement = "";
+    form.values.cvv = "";
+    form.values.expirantionYear = "";
+    form.values.expirationMonth = "";
+    form.values.fullname = "";
+    form.values.numberAddress = "";
+    form.values.numberCard = "";
+  };
+
+  useEffect(() => {
+    const handleConfirmation = () => {
+      if (isSuccess) {
+        dispatch(openConfirmation());
+      }
+    };
+
+    if (isSuccess) {
+      handleConfirmation();
+    }
+  }, [isSuccess, dispatch]);
+
   return (
     <CheckoutContainer className={handleCheckout() ? "is-open" : ""}>
       <Overlay onClick={() => dispatch(closeCart())} />
@@ -271,8 +282,12 @@ const Checkout = () => {
             </Row>
 
             <Buttons>
-              <Button onClick={handlePayment}>Continuar com o pagamento</Button>
-              <Button onClick={handleCart}>Voltar para o carrinho</Button>
+              <Button type="button" onClick={handlePayment}>
+                Continuar com o pagamento
+              </Button>
+              <Button type="button" onClick={handleCart}>
+                Voltar para o carrinho
+              </Button>
             </Buttons>
           </DeliveryContainer>
 
@@ -356,10 +371,8 @@ const Checkout = () => {
               </Field>
             </TwoFields>
             <Buttons>
-              <Button onClick={() => form.handleSubmit} type="submit">
-                Finalizar pagamento
-              </Button>
-              <Button onClick={handleDelivery}>
+              <Button type="submit">Finalizar pagamento</Button>
+              <Button type="button" onClick={handleDelivery}>
                 Voltar para a edição de endereço
               </Button>
             </Buttons>
@@ -393,7 +406,9 @@ const Checkout = () => {
                 </TextContainer>
 
                 <Buttons>
-                  <Button onClick={closeCartAll}>Concluir</Button>
+                  <Button type="button" onClick={closeCartAll}>
+                    Concluir
+                  </Button>
                 </Buttons>
               </>
             )}

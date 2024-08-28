@@ -15,7 +15,7 @@ const Perfil = () => {
   const { data: restaurant } = useGetRestaurantSelectedQuery(id);
 
   if (!restaurant) {
-    return <h3>Carregando...</h3> /* TODO: Colocar um loader aqui */;
+    return <h3>Carregando...</h3>;
   }
 
   return (
