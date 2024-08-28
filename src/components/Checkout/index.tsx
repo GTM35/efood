@@ -19,6 +19,7 @@ import {
   openPayment,
   Confirmation,
   closeCart,
+  openConfirmation,
 } from "../../redux/reducers/cart";
 
 import { useFormik } from "formik";
@@ -27,15 +28,19 @@ import * as Yup from "yup";
 import { IMaskInput } from "react-imask";
 import { usePurchaseMutation } from "../../service/api";
 import { formataPreco } from "../Food";
+import { useEffect } from "react";
+
+type Props = {
+  totalPrice: number;
+};
 
 const Checkout = ({ totalPrice }: Props) => {
   const dispatch = useDispatch();
 
   const [purchase, { isSuccess, data }] = usePurchaseMutation();
 
-  const { visibleConfirmation, visibleDelivery, visiblePayment } = useSelector(
-    (state: RootReducer) => state.cart
-  );
+  const { visibleConfirmation, visibleDelivery, visiblePayment, items } =
+    useSelector((state: RootReducer) => state.cart);
 
   const getErrorMessage = (fieldName: string, message?: string) => {
     const isTouched = fieldName in form.touched;
@@ -45,6 +50,23 @@ const Checkout = ({ totalPrice }: Props) => {
 
     return (message = "");
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(openConfirmation());
+      form.values.Cardname = "";
+      form.values.address = "";
+      form.values.cep = "";
+      form.values.city = "";
+      form.values.complement = "";
+      form.values.cvv = "";
+      form.values.expirantionYear = "";
+      form.values.expirationMonth = "";
+      form.values.fullname = "";
+      form.values.numberAddress = "";
+      form.values.numberCard = "";
+    }
+  }, [isSuccess]);
 
   const form = useFormik({
     initialValues: {
@@ -147,7 +169,11 @@ const Checkout = ({ totalPrice }: Props) => {
       form.values.cep &&
       form.values.numberAddress
     ) {
-      dispatch(openPayment());
+      if (items.length === 0) {
+        alert("Insira um produto no carrinho!");
+      } else {
+        dispatch(openPayment());
+      }
     } else {
       alert("Preencha todos os campos!");
     }
@@ -252,8 +278,12 @@ const Checkout = ({ totalPrice }: Props) => {
             </Row>
 
             <Buttons>
-              <Button onClick={handlePayment}>Continuar com o pagamento</Button>
-              <Button onClick={handleCart}>Voltar para o carrinho</Button>
+              <Button type="button" onClick={handlePayment}>
+                Continuar com o pagamento
+              </Button>
+              <Button type="button" onClick={handleCart}>
+                Voltar para o carrinho
+              </Button>
             </Buttons>
           </DeliveryContainer>
 
@@ -336,9 +366,7 @@ const Checkout = ({ totalPrice }: Props) => {
               </Field>
             </TwoFields>
             <Buttons>
-              <Button onClick={() => form.handleSubmit} type="submit">
-                Finalizar pagamento
-              </Button>
+              <Button type="submit">Finalizar pagamento</Button>
               <Button onClick={handleDelivery}>
                 Voltar para a edição de endereço
               </Button>
@@ -373,7 +401,9 @@ const Checkout = ({ totalPrice }: Props) => {
                 </TextContainer>
 
                 <Buttons>
-                  <Button onClick={closeCartAll}>Concluir</Button>
+                  <Button type="button" onClick={closeCartAll}>
+                    Concluir
+                  </Button>
                 </Buttons>
               </>
             )}
