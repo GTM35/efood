@@ -55,7 +55,7 @@ const Cart = () => {
           <AddCart onClick={handleDelivery}>Continuar com a entrega</AddCart>
         </Sidebar>
       </CartContainer>
-      <Checkout />
+      <Checkout totalPrice={getTotalPrice} />
     </>
   );
 };
