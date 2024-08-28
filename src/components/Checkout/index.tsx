@@ -28,8 +28,13 @@ import {
   TextContainer,
   TwoFields,
 } from "./style";
+import { formataPreco } from "../Food";
 
-const Checkout = () => {
+type Props = {
+  totalPrice: number;
+};
+
+const Checkout = ({ totalPrice }: Props) => {
   const dispatch = useDispatch();
 
   const [purchase, { isSuccess, data }] = usePurchaseMutation();
@@ -292,7 +297,7 @@ const Checkout = () => {
           </DeliveryContainer>
 
           <PaymentContainer className={visiblePayment ? "is-open" : ""}>
-            <h3>Pagamento - Valor a pagar R$ 190,90</h3>
+            <h3>Pagamento - Valor a pagar {formataPreco(totalPrice)}</h3>{" "}
             <Row>
               <label htmlFor="Cardname">Nome no cartão</label>
               <input
@@ -307,7 +312,6 @@ const Checkout = () => {
                 form.errors.Cardname
               )}`}</small>
             </Row>
-
             <TwoFields>
               <Field>
                 <label htmlFor="numberCard">Número do cartão</label>
